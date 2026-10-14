@@ -39,9 +39,15 @@ while True:
 #   c) if answer is not all digits (.isdigit()): print
 #        "Invalid input: please type a whole number."  and  continue
 #        (does NOT use up an attempt)
+    if answer.isdigit() is False:
+        print(f"Invalid input: please type a whole number")
+        continue
 #   d) convert with int(); if outside MIN_NUMBER..MAX_NUMBER: print
 #        "Out of range: choose a number from 1 to 100."  and  continue
 #        (does NOT use up an attempt)
+    elif (int(answer) < MIN_NUMBER) or (int(answer) > MAX_NUMBER):
+        print(f"Out of range: choose a number from 1 to 100.")
+        continue 
 #   e) now it is a real guess:  attempts += 1
     attempts += 1
 #   f) if/elif/else:  "Too low"  /  "Too high"  /
@@ -58,6 +64,7 @@ while True:
 #   g) if attempts >= MAX_ATTEMPTS (and the guess was wrong): print
 #        "Out of attempts! The number was <SECRET_NUMBER>."
 #        result = "LOSE" and break
+
 
 
 # Commit when the loop works for a WIN. Then commit again after LOSE/QUIT.
