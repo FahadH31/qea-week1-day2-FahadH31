@@ -31,27 +31,38 @@ print(f"Guess the number between {MIN_NUMBER} and {MAX_NUMBER}. "
 
 # ---- TODO 1: the game loop ---------------------------------------------------
 # Build a `while True:` loop. Inside it, in THIS order (order matters!):
-while True:
 #   a) read the answer:  answer = input("Guess (1-100): ").strip()
-    answer = input("Guess (1-100): ").strip()
 #   b) if answer is "q" (any case): print "You quit. The number was <SECRET_NUMBER>."
 #        set result = "QUIT"  and  break
 #   c) if answer is not all digits (.isdigit()): print
 #        "Invalid input: please type a whole number."  and  continue
 #        (does NOT use up an attempt)
-    if answer.isdigit() is False:
-        print(f"Invalid input: please type a whole number")
-        continue
 #   d) convert with int(); if outside MIN_NUMBER..MAX_NUMBER: print
 #        "Out of range: choose a number from 1 to 100."  and  continue
 #        (does NOT use up an attempt)
+#   e) now it is a real guess:  attempts += 1
+#   f) if/elif/else:  "Too low"  /  "Too high"  /
+#        "Correct! You needed <attempts> attempts."  -> result = "WIN" and break
+#   g) if attempts >= MAX_ATTEMPTS (and the guess was wrong): print
+#        "Out of attempts! The number was <SECRET_NUMBER>."
+#        result = "LOSE" and break
+
+while True:
+    answer = input("Guess (1-100): ").strip()
+
+    if answer.upper() == "Q":
+        print(f"You quit. The number was {SECRET_NUMBER}.")
+        result = "QUIT"
+        break
+    elif answer.isdigit() is False:
+        print(f"Invalid input: please type a whole number.")
+        continue
     elif (int(answer) < MIN_NUMBER) or (int(answer) > MAX_NUMBER):
         print(f"Out of range: choose a number from 1 to 100.")
         continue 
-#   e) now it is a real guess:  attempts += 1
+
     attempts += 1
-#   f) if/elif/else:  "Too low"  /  "Too high"  /
-#        "Correct! You needed <attempts> attempts."  -> result = "WIN" and break
+
     if int(answer) < SECRET_NUMBER:
         print("Too low")
         continue
@@ -61,10 +72,11 @@ while True:
         print(f"Correct! You needed {attempts} attempts.")
         result = "WIN"
         break
-#   g) if attempts >= MAX_ATTEMPTS (and the guess was wrong): print
-#        "Out of attempts! The number was <SECRET_NUMBER>."
-#        result = "LOSE" and break
 
+    if (attempts >= MAX_ATTEMPTS) and (int(answer) != SECRET_NUMBER):
+        print(f"Out of attempts! The number was {SECRET_NUMBER}.")
+        result = "LOSE"
+        break
 
 
 # Commit when the loop works for a WIN. Then commit again after LOSE/QUIT.
