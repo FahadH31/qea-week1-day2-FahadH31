@@ -31,7 +31,9 @@ print(f"Guess the number between {MIN_NUMBER} and {MAX_NUMBER}. "
 
 # ---- TODO 1: the game loop ---------------------------------------------------
 # Build a `while True:` loop. Inside it, in THIS order (order matters!):
+while True:
 #   a) read the answer:  answer = input("Guess (1-100): ").strip()
+    answer = input("Guess (1-100): ").strip()
 #   b) if answer is "q" (any case): print "You quit. The number was <SECRET_NUMBER>."
 #        set result = "QUIT"  and  break
 #   c) if answer is not all digits (.isdigit()): print
@@ -41,11 +43,23 @@ print(f"Guess the number between {MIN_NUMBER} and {MAX_NUMBER}. "
 #        "Out of range: choose a number from 1 to 100."  and  continue
 #        (does NOT use up an attempt)
 #   e) now it is a real guess:  attempts += 1
+    attempts += 1
 #   f) if/elif/else:  "Too low"  /  "Too high"  /
 #        "Correct! You needed <attempts> attempts."  -> result = "WIN" and break
+    if int(answer) < SECRET_NUMBER:
+        print("Too low")
+        continue
+    elif int(answer) > SECRET_NUMBER:
+        print("Too high")
+    else:
+        print(f"Correct! You needed {attempts} attempts.")
+        result = "WIN"
+        break
 #   g) if attempts >= MAX_ATTEMPTS (and the guess was wrong): print
 #        "Out of attempts! The number was <SECRET_NUMBER>."
 #        result = "LOSE" and break
+
+
 # Commit when the loop works for a WIN. Then commit again after LOSE/QUIT.
 
 # ---- Final line (provided; the checker reads this) --------------------------
