@@ -57,12 +57,24 @@ first_error_line = 0    # line_number of the first ERROR; 0 means none seen
 for raw_line in log_text.splitlines():
     line_number += 1
     line = raw_line.strip()
-    if (line is False) or (line[0] == "#"):
+    if (line == "") or (line[0] == "#"):
         continue
     elif(line == "END"):
         print(f"END marker reached, stopping.")
         break
     lines_scanned += 1
+
+    if "| ERROR |" in line:
+        error_count += 1
+        if(first_error_line == 0):
+            first_error_line = line_number
+        print(f"ERROR on line N: {line_number}")
+    elif "| WARN |" in line:
+        warn_count += 1
+    elif "| INFO |" in line:
+        info_count += 1
+    else:
+        unknown_count += 1
 
 
 # ---- TODO 3: the verdict -------------------------------------------------------
