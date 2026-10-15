@@ -65,7 +65,6 @@ while True:
 
     if int(answer) < SECRET_NUMBER:
         print("Too low")
-        continue
     elif int(answer) > SECRET_NUMBER:
         print("Too high")
     else:
