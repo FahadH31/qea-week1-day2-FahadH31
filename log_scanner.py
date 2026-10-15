@@ -54,6 +54,16 @@ first_error_line = 0    # line_number of the first ERROR; 0 means none seen
 #            "| INFO |"  in line   -> info_count += 1
 #            else                  -> unknown_count += 1
 # Commit after the loop counts correctly.
+for raw_line in log_text.splitlines():
+    line_number += 1
+    line = raw_line.strip()
+    if (line is False) or (line[0] == "#"):
+        continue
+    elif(line == "END"):
+        print(f"END marker reached, stopping.")
+        break
+    lines_scanned += 1
+
 
 # ---- TODO 3: the verdict -------------------------------------------------------
 # verdict = "PASS" if error_count is 0, otherwise "FAIL"  (if / else)
